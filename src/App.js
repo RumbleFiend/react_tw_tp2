@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link } from "react-router-dom";
+import "./App.css";
 
 function App() {
+  const items = [
+    { label: "Home", url: "/" },
+    { label: "Animals", url: "/animals" },
+    { label: "Birds", url: "/birds" },
+    { label: "Food for your pet", url: "/food" },
+  ];
+  
+
+  const menu = items.map(({ label, url }, i) => (
+    <li key={i} className="nav-item">
+      <Link className="nav-link" label={label} to={url}>
+        <span>{label} </span>
+      </Link>
+    </li>
+  ));
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav className="navbar navbar-expand navbar-dark bg-dark ">
+        <ul className="nav navbar-nav mx-auto">{menu}</ul>
+      </nav>
+      
     </div>
   );
 }

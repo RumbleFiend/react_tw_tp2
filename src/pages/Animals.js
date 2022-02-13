@@ -1,50 +1,55 @@
-import React, { useState } from "react";
 import Animal from "../components/Animal";
+import React, { Component } from 'react';
 
-function Animals() {
-  const animalsArray = [
-    {
-      nom: "Tom",
-      espece: "Chat",
-      age: "2",
-      descr: "un chat hyper gentil",
-      image: "Tom.jpg",
-      like: false,
-    },
-    {
-      nom: "Greta",
-      espece: "Chien",
-      age: "5",
-      descr: "une chienne adorable pour les enfants",
-      image: "Greta.jpg",
-      like: false,
-    },
-    {
-      nom: "Brandon",
-      espece: "Chien",
-      age: "10",
-      descr: "Ce bulldog est fait pour les grands amateurs",
-      image: "Brandon.jpg",
-      like: false,
-    },
-  ];
+export default class Animals extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      myAnimals :[
+        {
+          nom: "Tom",
+          espece: "Chat",
+          age: "2",
+          descr: "un chat hyper gentil",
+          image: "Tom.jpg",
+          like: false,
+        },
+        {
+          nom: "Greta",
+          espece: "Chien",
+          age: "5",
+          descr: "une chienne adorable pour les enfants",
+          image: "Greta.jpg",
+          like: false,
+        },
+        {
+          nom: "Brandon",
+          espece: "Chien",
+          age: "10",
+          descr: "Ce bulldog est fait pour les grands amateurs",
+          image: "Brandon.jpg",
+          like: false,
+        },
+      ],
+    }
+  }
 
-  const [myAnimals, setAnimals] = useState(animalsArray);
-
-  const changeLike = (nom) => {
-    setAnimals(  //pour changer like
-      myAnimals.map((animal) =>
-        animal.nom === nom ? { ...animal, like: !animal.like } : { ...animal }
-      )
+  changeLike (nom){
+    const newArray = this.state.myAnimals.map((animal) =>
+    animal.nom === nom ? { ...animal, like: !animal.like } : { ...animal }
+    )
+    this.setState({  //pour changer like
+      myAnimals: newArray
+    }
     );
     console.log("changed");
   };
 
-  return (
-    <div>
-      <AnimalsList changeLike={changeLike} animals={myAnimals}></AnimalsList>
-    </div>
-  );
+  
+  render() {
+    return <div><AnimalsList changeLike={this.changeLike} animals={this.state.myAnimals}></AnimalsList></div>;
+  }
 }
 
 
@@ -74,4 +79,4 @@ const AnimalsList = (props) => {
   );
 };
 
-export default Animals;
+
